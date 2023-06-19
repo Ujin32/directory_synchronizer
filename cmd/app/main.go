@@ -20,9 +20,9 @@ var (
 
 func main() {
 	//Флаги командной строки
-	flag.StringVar(&pathSourse, "output", "/sourseDirectiry", "Intput file path")
-	flag.StringVar(&pathDestination, "input", "/targetDirectory", "Output file path")
-	flag.StringVar(&syncPeriod, "syncPeriod", `180`, "Directory synchronization period")
+	flag.StringVar(&pathSourse, "output", `\golang\GO-BASE-FINAL\sourseDirectiry\`, "Intput file path")
+	flag.StringVar(&pathDestination, "input", `D:\golang\GO-BASE-FINAL\targetDirectory\`, "Output file path")
+	flag.StringVar(&syncPeriod, "syncPeriod", `10`, "Directory synchronization period")
 	flag.Parse()
 
 	//Контекст на отмену

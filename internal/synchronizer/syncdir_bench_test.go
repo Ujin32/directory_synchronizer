@@ -5,12 +5,29 @@ import (
 	"log"
 	"os"
 	"testing"
+
+	"github.com/joho/godotenv"
 )
 
-// Пути к файлам захардкожены для тестирования производительности
+type tempPaths struct {
+	tempSource string
+	tempTarget string
+}
+
+var result = func() *tempPaths {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal(err)
+	}
+	return &tempPaths{
+		tempSource: os.Getenv("BENCHSOURSE"),
+		tempTarget: os.Getenv("BENCHTARGET"),
+	}
+}()
+
 var pathToCopy *CopyPaths = &CopyPaths{
-	inPath:  `D:\golang\GO-BASE-FINAL\sourseDirectiry\others\futerman\Future.Man.S03E01.1080p.AMZN.WEB-DL.H.264.RGzsRutracker.[Wentworth_Miller].NTb.mkv`,
-	outPath: `D:\golang\GO-BASE-FINAL\targetDirectory\others\futerman\Future.Man.S03E01.1080p.AMZN.WEB-DL.H.264.RGzsRutracker.[Wentworth_Miller].NTb.mkv`,
+	inPath:  result.tempSource,
+	outPath: result.tempTarget,
 }
 
 type benchStruct struct {

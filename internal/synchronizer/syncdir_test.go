@@ -23,9 +23,9 @@ func TestGetDestinationPath(t *testing.T) {
 	loggers := map[lg.LoggerKey]*log.Logger{
 		lg.LoggerKey("error"): log.New(new(MockLogger), "", 0),
 	}
-	sourseDir := createTempDir(t, "sourse")
-	targetDir := createTempDir(t, "target")
-	sourseFile := creatTempFile(t, sourseDir, "tempFile.txt")
+	sourseDir := CreateTempDir(t, "sourse")
+	targetDir := CreateTempDir(t, "target")
+	sourseFile := CreatTempFile(t, sourseDir, "tempFile.txt")
 
 	//Валидный путь
 	t.Run("valid path", func(t *testing.T) {
@@ -47,7 +47,7 @@ func TestGetDestinationPath(t *testing.T) {
 
 }
 
-func createTempDir(t *testing.T, prefix string) string {
+func CreateTempDir(t *testing.T, prefix string) string {
 	t.Helper()
 
 	tempSourseDir, err := os.MkdirTemp("", prefix)
@@ -56,7 +56,7 @@ func createTempDir(t *testing.T, prefix string) string {
 	return tempSourseDir
 }
 
-func creatTempFile(t *testing.T, dir, nameFile string) string {
+func CreatTempFile(t *testing.T, dir, nameFile string) string {
 	t.Helper()
 
 	filePath := filepath.Join(dir, nameFile)
@@ -76,10 +76,10 @@ func TestCopyFile(t *testing.T) {
 		req := require.New(t)
 
 		fmt.Println(req, loggers)
-		sourseDir := createTempDir(t, "sourse")
-		targetDir := createTempDir(t, "target")
+		sourseDir := CreateTempDir(t, "sourse")
+		targetDir := CreateTempDir(t, "target")
 
-		sourseFilePath := creatTempFile(t, sourseDir, "tempFile.txt")
+		sourseFilePath := CreatTempFile(t, sourseDir, "tempFile.txt")
 		fileBase := filepath.Base(sourseFilePath)
 		destinationFilePath := filepath.Join(targetDir, fileBase)
 		resPath := &CopyPaths{
@@ -99,9 +99,9 @@ func TestCopyFile(t *testing.T) {
 	//Не правильное имя файла
 	t.Run("Failed: 'targetDir' to CopyFile", func(t *testing.T) {
 		req := require.New(t)
-		sourseDir := createTempDir(t, "sourse")
-		targetDir := createTempDir(t, "target")
-		sourseFilePath := creatTempFile(t, sourseDir, "tempFile.txt")
+		sourseDir := CreateTempDir(t, "sourse")
+		targetDir := CreateTempDir(t, "target")
+		sourseFilePath := CreatTempFile(t, sourseDir, "tempFile.txt")
 		destinationFilePath := filepath.Join(targetDir, "")
 		resPath := &CopyPaths{
 			inPath:  sourseFilePath,
